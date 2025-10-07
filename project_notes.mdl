@@ -1,0 +1,11 @@
+# Notas de proyecto y lecciones aprendidas
+
+## Setup de Docker
+- Comando clave: `docker-compose up --build`
+- Se arreglaron problemas de sesión al dockerizar con: cookie `sameSite: 'lax'` y `proxy: true`
+- Configuración de NGINX: se agregaron configuraciones apropiadas de headers y cookies
+
+## Bug Fixes
+- Se editó bug donde se mantiene el id del trabajador editado `currentEditId` en vez de querySelector, ya que eso provocaba ediciones no deseadas
+- Uso de nombres exactos de acuerdo a los que usa AlwaysData
+- Uso de contexto .this para corregir errores en las pruebas

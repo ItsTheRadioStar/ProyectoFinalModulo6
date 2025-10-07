@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  # Aplicación principal (sin cambios)
+  main-app:
+    build: .
+    env_file:
+      - docker.env
+    # No se exponen puertos directamente, ya que NGINX manejará el tráfico
+    networks:
+      - app-network
+
+  # NGINX como gateway/reverse proxy
+  nginx-gateway:
+    image: nginx:alpine
+    ports:
+      - "80:80" # Punto de entrada para los usuarios
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - main-app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

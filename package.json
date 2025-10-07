@@ -1,0 +1,33 @@
+{
+  "name": "proyecto-final-modulo6",
+  "version": "1.0.0",
+  "description": "Proyecto final de Modulo 6",
+  "license": "ISC",
+  "author": "Martin Garcia Rdz",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "cross-env NODE_ENV=development node app.js",
+    "production": "cross-env NODE_ENV=production node app.js",
+    "test:run": "cross-env NODE_ENV=test mocha tests/**/*.test.js --timeout 10000",
+    "test:watch": "cross-env NODE_ENV=test mocha tests/**/*.test.js --watch --timeout 10000",
+    "test:coverage": "cross-env NODE_ENV=test nyc mocha tests/**/*.test.js --timeout 10000"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "mysql2": "^3.15.0"
+  },
+  "devDependencies": {
+    "chai": "^6.2.0",
+    "mocha": "^11.7.2",
+    "nyc": "^17.1.0",
+    "supertest": "^7.1.4"
+  }
+}

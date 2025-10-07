@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Proyecto Final Módulo 6</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="/scripts/dashboard.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container-xl">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>Administrar <b>Trabajadores</b></h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
+                                    class="material-icons">&#xE147;</i> <span>Agregar Nuevo Registro</span></a>
+                            <a id="deleteSelectedBtn" href="#" class="btn btn-danger"><i
+                                    class="material-icons">&#xE15C;</i> <span>Borrar</span></a>
+                        </div>
+                    </div>
+                </div>
+                <table id="workersTable" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Puesto</th>
+                            <th>Dirección</th>
+                            <th>Teléfono</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas serán agregadas aquí por medio de JavaScript -->
+                    </tbody>
+                </table>
+                <div id="pagination"></div>
+                <br>
+                <button id="logoutBtn" class="btn btn-primary">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para agregar registros -->
+    <div id="addEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="addWorkerForm">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Añadir Registro</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input id="addName" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input id="addEmail" type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Empleo o Profesión</label>
+                            <input id="addJob" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Dirección</label>
+                            <textarea id="addAddress" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input id="addPhone" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                        <input id="confirmAddBtn" type="submit" class="btn btn-success" value="Añadir">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para editar registros -->
+    <div id="editEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editWorkerForm">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Editar Registro</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input id="editName" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo</label>
+                            <input id="editEmail" type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Empleo o Profesión</label>
+                            <input id="editJob" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Dirección</label>
+                            <textarea id="editAddress" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input id="editPhone" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                        <input id="confirmEditBtn" type="submit" class="btn btn-info" value="Guardar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para borrar registros -->
+    <div id="deleteEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="deleteWorkerForm">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Borrar Registro</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estás seguro de que deseas borrar este registro?</p>
+                        <p class="text-warning"><small>Esta acción no se puede deshacer.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                        <input id="confirmDeleteBtn" type="submit" class="btn btn-danger" value="Borrar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
